@@ -22,16 +22,18 @@
 // const { person } = require('./person.js');
 // const person = require('person.js');
 const Express= require('express');
-
+const helmet = require('helmet');
+const serveStatic = require('serve-static');
 const app = Express();
+
+const path = require('path');
+const publicPath = path.join(__dirname, 'public');
+app.use(serveStatic(publicPath));
+
 
 app.get('/',function(req,res){
     console.log('Hello');
-    res.send('Hello World');
-    // res.send(req);
-    // console.log(req);
-
 });
-app.listen(3000,function(){
+app.listen(process.env.PORT||3000,function(){
     console.log('start listen http://localhost:3000');
 })
